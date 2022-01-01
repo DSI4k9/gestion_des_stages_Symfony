@@ -15,4 +15,20 @@ class UsersController extends AbstractController
     {
         return $this->render('users/index.html.twig');
     }
+
+    /**
+     * @Route("/admin/dashboard", name="dashboard")
+     */
+    public function dashboard(): Response
+    {
+        return $this->render('users/admin/index.html.twig');
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(): Response
+    {
+        return $this->render('users/login/index.html.twig');
+    }
 }
