@@ -2,20 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ClasseRepository;
+use App\Repository\FiliereRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Timestampable;
 
-
 /**
- * @ORM\Entity(repositoryClass=ClasseRepository::class)
- * @ORM\Table(name="classes")
+ * @ORM\Entity(repositoryClass=FiliereRepository::class)
+ * @ORM\Table(name="filieres")
  * @ORM\HasLifecycleCallbacks
  */
-class Classe
+class Filiere
 {
 
     use Timestampable;
+
 
     /**
      * @ORM\Id
@@ -27,26 +27,25 @@ class Classe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $niveau;
+    private $nomFiliere;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNiveau(): ?string
+    public function getNomFiliere(): ?string
     {
-        return $this->niveau;
+        return $this->nomFiliere;
     }
 
-    public function setNiveau(string $niveau): self
+    public function setNomFiliere(string $nomFiliere): self
     {
-        $this->niveau = $niveau;
+        $this->nomFiliere = $nomFiliere;
 
         return $this;
     }
-
-    
 
 
 }

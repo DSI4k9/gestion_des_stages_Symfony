@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Modifier Filiere #' ~ filiere.id %}
+
+{% block body %}
+    <style>
+        .img-parent {
+            position: relative;
+        }
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #242A56;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        .img-content {
+            position: absolute;
+            z-index: 2;
+            top: 26%;
+            text-align: center;
+            color: #fff;
+            left: 27%;
+        }
+    </style>
+
+    {# Header section #}
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="background-color:#737793">
+        <div class="container-fluid" style="margin:0 331.5px 0 331.5px; ">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('stage_eady.png') }}" alt="" width="160" height="99" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav" style="margin-left:auto;">
+                    <li class="nav-item"><a href="/" class="nav-link" style="color:white;">Dashboard</a></li>
+                    <li class="nav-item"><a href="/filieres" class="nav-link" style="margin-left:5px; color:white;">Filieres</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Modifier Filiere #{{ filiere.id }}</h1>
+
+            {{ include('filieres/_form.html.twig', {'submitButtonText': 'Update Filiere'}) }}
+        </div>
+    </div>
+{% endblock %}
