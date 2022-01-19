@@ -1,32 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Modifier Filiere #' ~ filiere.id %}
+{% block title filiere.nomFiliere %}
 
 {% block body %}
-    <style>
-        .img-parent {
-            position: relative;
-        }
-        .img-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #242A56;
-            z-index: 1;
-            opacity: 0.6;
-        }
-        .img-content {
-            position: absolute;
-            z-index: 2;
-            top: 26%;
-            text-align: center;
-            color: #fff;
-            left: 27%;
-        }
-    </style>
-
     {# Header section #}
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="background-color:#737793">
         <div class="container-fluid" style="margin:0 331.5px 0 331.5px; ">
@@ -44,12 +20,14 @@
             </div>
         </div>
     </nav>
-    
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <h1>Modifier Filiere #{{ filiere.id }}</h1>
+    <article>
+        <h1>nom filiere : {{ filiere.getNomFiliere() }} </h1>
+        <a href="{{ path('filiere_edit', {'id': filiere.id}) }}"  class="btn btn-primary">Edit</a>
+        <a href="#" class="btn btn-danger" onclick="event.preventDefault(); confirm('Are you sure?') && document.getElementById('js-filiere-delete-form').submit();" class="btn btn-light">Delete</a>
+        <form id="js-filiere-delete-form" action="{{ path('filiere_delete', {id: filiere.id}) }}" method="POST" style="display: none;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('filiere_deletion_' ~ filiere.id) }}">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+    </article>
 
-            {{ include('filieres/_form.html.twig', {'submitButtonText': 'Update Filiere'}) }}
-        </div>
-    </div>
 {% endblock %}

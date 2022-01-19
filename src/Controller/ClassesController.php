@@ -16,7 +16,7 @@ class ClassesController extends AbstractController
     public function index(ClasseRepository $classeRepository): Response
     {
         $classes = $classeRepository->findAll();
-        return $this->render('classes/index.html.twig', compact('classes'));
+        return $this->render('classes/admin/classe.html.twig', compact('classes'));
     }
 
     /**
@@ -24,6 +24,6 @@ class ClassesController extends AbstractController
      */
     public function show(Classe $classe): Response
     {
-        return $this->render('classes/index.html.twig', compact('classes'));
+        return $this->render('classes/admin/classe.html.twig', compact('classes'));
     }
 }

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login/register{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/users/login/style.css') }}">
+{% endblock %}
+{% block body %} 
+<body>
+    <div class="container" id="main">
+        <div class="sign-in" style="color: #548DD4">
+            <form action="">
+                <h1>Créer un compte</h1>
+                <p>Soyez les bienvenus ! </p>
+                <input style="color: #548DD4" type="text" name="txt" placeholder="Nom" required>
+                <input style="color: #548DD4" type="email" name="email" placeholder="Email" required>
+                <input style="color: #548DD4" type="password" name="pass" placeholder="Mot de passe" required>
+                <button>S'inscrire</button>
+            </form>
+        </div>
+        <div class="sign-up" style="color: #548DD4">
+            <form action="">
+                <h1>Se connecter</h1>
+                <p>Bon retour avec nous !</p>
+                <input style="color: #548DD4" type="email" name="email" placeholder="Email" required>
+                <input style="color: #548DD4" type="password" name="pass" placeholder="Mot de passe" required>
+                <a href="#" style="color: #548DD4">Mot de passe oublié ?</a>
+                <button>Se connecter</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                    <h1>Pas encore inscrit ?</h1>
+                    <p>Cliquez ici pour nous joindre !</p>
+                    <button id="signIn">S'inscrire</button>
+                </div>
+                <div class="overlay-right">
+                    <h1>Déjà inscrit ?</h1>
+                    <p>Cliquez-ici pour vous connecter</p>
+                    <button id="signUp">Se connecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    const signUpBtn = document.getElementById("signUp");
+    const signInBtn = document.getElementById("signIn");
+    const main = document.getElementById("main");
+    signUpBtn.addEventListener("click", () => {
+        main.classList.add("right-panel-active");
+    });
+    signInBtn.addEventListener("click", () => {
+        main.classList.remove("right-panel-active");
+    });
+    </script>
+</body>
+{% endblock %}
