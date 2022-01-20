@@ -1,30 +1,123 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'tout les filieres' %}
-
-{% block body %}
-    {# Header section #}
-    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="background-color:#737793">
-        <div class="container-fluid" style="margin:0 331.5px 0 331.5px; ">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('stage_eady.png') }}" alt="" width="160" height="99" class="d-inline-block align-text-top">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav" style="margin-left:auto;">
-                    <li class="nav-item"><a href="/" class="nav-link" style="color:white;">Dashboard</a></li>
-                    <li class="nav-item"><a href="/filieres" class="nav-link" style="margin-left:5px; color:white;">Filieres</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <a href="{{ path('filiere_create') }}"  class="btn btn-primary">Ajouter</a>
-    <h1>{{filieres|length}} filiers<h1>
-    {% for filiere in filieres %}
-        <article>
-            <h1>nom filiere : <a href="{{ path('app_filieres_show_admin', {id:filiere.id}) }}">{{ filiere.getNomFiliere() }}</a></h1>
-        </article>
-    {% endfor %}
+{% block title %}Dashboard{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/users/admin/style.css') }}">
 {% endblock %}
+{% block body %} 
+<body>
+
+    <div class="container">
+        <!-- Change names and add icons -->
+        <!-- Side navigation -->
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="logo"><img src="{{ asset('images/logo/stage_eady.png') }}" alt="" style="width:50px; height:auto; margin-top:11px"></span>
+                        <span class="title">Gestionnaires des stages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/filieres">
+                        <span class="logo"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Gerer filieres</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/classes">
+                        <span class="logo"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="title">Gerer classes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="logo"><ion-icon name="school-outline"></ion-icon></span>
+                        <span class="title">Section 3</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="logo"><ion-icon name="mail-outline"></ion-icon></span>
+                        <span class="title">Section 4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="logo"><ion-icon name="calendar-outline"></ion-icon></span>
+                        <span class="title">Section 5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="logo"><ion-icon name="desktop-outline"></ion-icon></span>
+                        <span class="title">Section 6</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Main -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <!-- Search bar -->
+                <div class="search">
+                    <label for="">
+                        <input type="text" placeholder="Looking for ?">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+                <!-- profile -->
+                <div class="user">
+                    <img src="{{ asset('images/user/1.png') }}" alt="">
+                </div>
+            </div>
+            <!-- Stats -->
+            <h1 style="text-align: center; font-size:60px">Il y a {{filieres|length}} filières<h1>
+            <div class="cardBox">
+            
+                {% for filiere in filieres %}
+                <a style="text-decoration:none;" href="{{ path('app_filieres_show_admin', {id:filiere.id}) }}">
+                    <div class="card">
+                        <div>
+                            {# <div class="numbers"></div> #}
+                            <div class="cardName">{{ filiere.getNomFiliere() }}</div>
+                        </div>
+                        {# <div class="iconBx">
+                            <ion-icon name="log-in-outline"></ion-icon>
+                        </div> #}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        <a href="{{ path('filiere_create') }}"  style="float:right;font-size:18px;font-weight:bold;background:#76923C;width:160px;padding:20px;text-align:center;text-decoration:none;text-transform:uppercase;color:#fff;border-radius:5px;">Ajouter</a>
+
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+
+        toggle.onclick = function(){
+            navigation.classList.toggle('active');
+            main.classList.toggle('active');
+        }
+
+
+        let list = document.querySelectorAll('.navigation li');
+
+        function activeLink() {
+            list.forEach((item) =>
+                item.classList.remove('hovered'));
+            this.classList.add('hovered');
+        }
+        list.forEach((item) => item.addEventListener('mouseover', activeLink));
+    </script>
+</body>
+{% endblock %}
+
