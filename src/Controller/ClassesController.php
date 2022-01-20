@@ -52,4 +52,27 @@ class ClassesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/classe/{id<[0-9]+>}/edit", name="classe_edit", methods={"GET", "PUT", "POST"})
+     */
+    public function edit(Request $request, Classe $classe, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(FiliereType::class, $classe);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+
+            return $this->redirectToRoute('app_classe_show_admin', array('id' => $classe->getId()));
+        }
+
+        return $this->render('classes/admin/edit.html.twig', [
+            'classe' => $classe,
+            'form' => $form->createView()
+        ]);
+    }
+
+    
 }
