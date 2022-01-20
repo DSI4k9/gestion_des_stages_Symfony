@@ -74,5 +74,20 @@ class ClassesController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * @Route("/admin/classe/{id<[0-9]+>}", name="classe_delete", methods={"DELETE","POST"})
+     */
+    public function delete(Request $request, Classe $classe, EntityManagerInterface $em): Response
+    {
+        $em->remove($classe);
+            $em->flush();
+
+        // if ($this->isCsrfTokenValid('filiere_deletion_' . $filiere->getId(), $request->request->get('csrf_token'))) {
+        //     $em->remove($filiere);
+        //     $em->flush();
+
+        // }
+
+        return $this->redirectToRoute('app_classes');
+    }
 }
