@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Filiere;
 use App\Repository\FiliereRepository;
+use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -79,7 +80,7 @@ class FilieresController extends AbstractController
      */
     public function delete(Request $request, Filiere $filiere, EntityManagerInterface $em): Response
     {
-
+        
         if ($this->isCsrfTokenValid('filiere_deletion_' . $filiere->getId(), $request->request->get('csrf_token'))) {
             $em->remove($filiere);
             $em->flush();

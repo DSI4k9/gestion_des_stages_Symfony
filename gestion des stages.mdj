@@ -3881,7 +3881,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF9sNplDIGSKGU="
 									},
-									"text": "*"
+									"text": "1"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -5067,7 +5067,7 @@
 								"reference": {
 									"$ref": "AAAAAAF9sLj8wWrpE4M="
 								},
-								"multiplicity": "*"
+								"multiplicity": "1"
 							}
 						}
 					]
