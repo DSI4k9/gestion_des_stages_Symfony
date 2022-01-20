@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Classe;
 use App\Repository\ClasseRepository;
+use App\Repository\FiliereRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,14 +19,16 @@ class ClassesController extends AbstractController
     public function index(ClasseRepository $classeRepository): Response
     {
         $classes = $classeRepository->findAll();
-        return $this->render('classes/index.html.twig', compact('classes'));
+        return $this->render('classes/admin/classe.html.twig', compact('classes'));
     }
 
     /**
-     * @Route("/admin/classes/{id<[0-9]+}", name="admin_classes_show")
+     * @Route("/admin/classes/{id<[0-9]+>}", name="admin_classes_show")
      */
     public function show(Classe $classe): Response
     {
-        return $this->render('classes/index.html.twig', compact('classes'));
+        return $this->render('classes/admin/show.html.twig', compact('classe'));
     }
+
+    
 }

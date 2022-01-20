@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/users", name="home")
+     * @Route("/admin/dashboard", name="home")
      */
     public function index(): Response
     {
-        return $this->render('users/index.html.twig');
+        return $this->render('users/admin/dashboard.html.twig');
     }
 }

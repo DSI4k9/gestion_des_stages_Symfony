@@ -15,12 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class FilieresController extends AbstractController
 {
     /**
-     * @Route("/filieres", name="app_filieres")
+     * @Route("/admin/filieres", name="app_filieres")
      */
     public function index(FiliereRepository $filiereRepository): Response
     {
         $filieres = $filiereRepository->findAll();
-        return $this->render('filieres/index.html.twig', compact('filieres'));
+        return $this->render('filieres/admin/filiere.html.twig', compact('filieres'));
     }
 
      /**
@@ -28,11 +28,11 @@ class FilieresController extends AbstractController
      */
     public function show(Filiere $filiere): Response
     {
-        return $this->render('filieres/show.html.twig', compact('filiere'));
+        return $this->render('filieres/admin/show.html.twig', compact('filiere'));
     }
 
     /**
-     * @Route("/filiere/create", name="filiere_create", methods={"GET", "POST"})
+     * @Route("/admin/filiere/create", name="filiere_create", methods={"GET", "POST"})
      */
     public function create(Request $request, EntityManagerInterface $em, FiliereRepository $filiereRepo): Response
     {
@@ -48,13 +48,13 @@ class FilieresController extends AbstractController
             return $this->redirectToRoute('app_filieres');
         }
 
-        return $this->render('filieres/create.html.twig', [
+        return $this->render('filieres/admin/create.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/filiere/{id<[0-9]+>}/edit", name="filiere_edit", methods={"GET", "PUT", "POST"})
+     * @Route("/admin/filiere/{id<[0-9]+>}/edit", name="filiere_edit", methods={"GET", "PUT", "POST"})
      */
     public function edit(Request $request, Filiere $filiere, EntityManagerInterface $em): Response
     {
@@ -69,23 +69,25 @@ class FilieresController extends AbstractController
             return $this->redirectToRoute('app_filieres_show_admin', array('id' => $filiere->getId()));
         }
 
-        return $this->render('filieres/edit.html.twig', [
+        return $this->render('filieres/admin/edit.html.twig', [
             'filiere' => $filiere,
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/filiere/{id<[0-9]+>}", name="filiere_delete", methods={"DELETE","POST"})
+     * @Route("/admin/filiere/{id<[0-9]+>}", name="filiere_delete", methods={"DELETE","POST"})
      */
     public function delete(Request $request, Filiere $filiere, EntityManagerInterface $em): Response
     {
-        
-        if ($this->isCsrfTokenValid('filiere_deletion_' . $filiere->getId(), $request->request->get('csrf_token'))) {
-            $em->remove($filiere);
+        $em->remove($filiere);
             $em->flush();
 
-        }
+        // if ($this->isCsrfTokenValid('filiere_deletion_' . $filiere->getId(), $request->request->get('csrf_token'))) {
+        //     $em->remove($filiere);
+        //     $em->flush();
+
+        // }
 
         return $this->redirectToRoute('app_filieres');
     }
