@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title classe.getNiveau %}
+
+{% block body %}
+    {# Header section #}
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" style="background-color:#737793">
+        <div class="container-fluid" style="margin:0 331.5px 0 331.5px; ">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('stage_eady.png') }}" alt="" width="160" height="99" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav" style="margin-left:auto;">
+                    <li class="nav-item"><a href="/" class="nav-link" style="color:white;">Dashboard</a></li>
+                    <li class="nav-item"><a href="/classes" class="nav-link" style="margin-left:5px; color:white;">Classes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <article>
+        <h1>niveau classe : {{ classe.getNiveau() }} </h1>
+        <a href="{{ path('classe_edit', {'id': classe.id}) }}"  class="btn btn-primary">Edit</a>
+        <a href="#" class="btn btn-danger" onclick="event.preventDefault(); confirm('Are you sure?') && document.getElementById('js-classe-delete-form').submit();" class="btn btn-light">Delete</a>
+        <form id="js-classe-delete-form" action="{{ path('classe_delete', {id: classe.id}) }}" method="POST" style="display: none;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('classe_deletion_' ~ classe.id) }}">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+    </article>
+
+{% endblock %}

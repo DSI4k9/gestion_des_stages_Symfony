@@ -30,5 +30,26 @@ class ClassesController extends AbstractController
         return $this->render('classes/admin/show.html.twig', compact('classe'));
     }
 
-    
+    /**
+     * @Route("/admin/classe/create", name="classe_create", methods={"GET", "POST"})
+     */
+    public function create(Request $request, EntityManagerInterface $em, FiliereRepository $filiereRepo): Response
+    {
+        $classe = new Classe;        
+
+        $form = $this->createForm(FiliereType::class, $classe);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($classe);
+            $em->flush();            
+            return $this->redirectToRoute('app_classes');
+        }
+
+        return $this->render('classes/admin/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }
